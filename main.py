@@ -11,7 +11,8 @@ from mysql.connector import Error
 
 # SQL Connection
 try:
-    connection = mysql.connector.connect(host='localhost',
+    connection = mysql.connector.connect(host='192.168.1.32',
+                                         port='3306',
                                          database='Operations',
                                          user='root',
                                          password='06021999')
@@ -33,49 +34,49 @@ total = []
 
 
 # attemptToMakeTradeUsingThresholds
-# def attemptToMakeTrade(nextOperation,BTCvalue,balanceUSD,balanceBTC,total1):
-#     BalanceBTCT = 0
-#     BalanceUSDT = 0
-#     DipThreshold = 11735
-#     ProfitThreshold = 11790
-#     StopLossThreshold = 11200
-#     total1 = []
-#     if nextOperation == True and BTCvalue < DipThreshold:
-#         BalanceNew = tryToBuy(BTCvalue,balanceUSD,balanceBTC)
-#         BalanceUSDT = BalanceNew[0]
-#         BalanceBTCT = BalanceNew[1]
-#         total1 = [BalanceUSDT, BalanceBTCT, BalanceUSD + BTCvalue * BalanceBTC]
-#         return total1
-#
-#     if nextOperation == False and (BTCvalue > ProfitThreshold or BTCvalue < StopLossThreshold):
-#         BalanceNew = tryToSell(BTCvalue,balanceUSD,balanceBTC)
-#         BalanceUSDT = BalanceNew[0]
-#         BalanceBTCT = BalanceNew[1]
-#         total1 = [BalanceUSDT, BalanceBTCT, BalanceUSD + BTCvalue * BalanceBTC]
-#         return total1
-#     else:
-#         total1 = [balanceUSD,balanceBTC,balanceUSD + BalanceBTC * BTCvalue]
-#         return total1
+def attemptToMakeTrade(nextOperation,BTCvalue,balanceUSD,balanceBTC,total1):
+    BalanceBTCT = 0
+    BalanceUSDT = 0
+    DipThreshold = 11735
+    ProfitThreshold = 11790
+    StopLossThreshold = 11200
+    total1 = []
+    if nextOperation == True and BTCvalue < DipThreshold:
+        BalanceNew = tryToBuy(BTCvalue,balanceUSD,balanceBTC)
+        BalanceUSDT = BalanceNew[0]
+        BalanceBTCT = BalanceNew[1]
+        total1 = [BalanceUSDT, BalanceBTCT, BalanceUSD + BTCvalue * BalanceBTC]
+        return total1
+
+    if nextOperation == False and (BTCvalue > ProfitThreshold or BTCvalue < StopLossThreshold):
+        BalanceNew = tryToSell(BTCvalue,balanceUSD,balanceBTC)
+        BalanceUSDT = BalanceNew[0]
+        BalanceBTCT = BalanceNew[1]
+        total1 = [BalanceUSDT, BalanceBTCT, BalanceUSD + BTCvalue * BalanceBTC]
+        return total1
+    else:
+        total1 = [balanceUSD,balanceBTC,balanceUSD + BalanceBTC * BTCvalue]
+        return total1
 
 
 
 # Buy Operation Function_forThresholdsUsing
-# def tryToBuy(BTC,BLUSD,BLBTC):
-#     B = []
-#     BTCF = float(BTC)
-#     B.append(BLUSD /2)
-#     x = BLBTC + 0.5 * BLUSD / BTC
-#     B.append(x)
-#     connection = mysql.connector.connect(host='localhost',
-#                                          database='Operations',
-#                                          user='root',
-#                                          password='Ben206399073')
-#     cursor = connection.cursor()
-#     cursor.execute("INSERT INTO operations(BuyOrSell, BTCValue ) VALUES (%s,%s)", ("Buy", BTCF))
-#     connection.commit()
-#     connection.close()
-#     print('trytobuy')
-#     return B
+def tryToBuy(BTC,BLUSD,BLBTC):
+    B = []
+    BTCF = float(BTC)
+    B.append(BLUSD /2)
+    x = BLBTC + 0.5 * BLUSD / BTC
+    B.append(x)
+    connection = mysql.connector.connect(host='localhost',
+                                         database='Operations',
+                                         user='root',
+                                         password='Ben206399073')
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO operations(BuyOrSell, BTCValue ) VALUES (%s,%s)", ("Buy", BTCF))
+    connection.commit()
+    connection.close()
+    print('trytobuy')
+    return B
 # TryToBuy
 def tryToBuy(BTC,BLUSD,BLBTC):
     print('TryToBuy')
@@ -90,7 +91,8 @@ def tryToBuy(BTC,BLUSD,BLBTC):
     # B.append(BLUSD * 0)
 
     BTCF = float(BTC)
-    connection = mysql.connector.connect(host='localhost',
+    connection = mysql.connector.connect(host='192.168.1.32',
+                                         port='3306',
                                          database='Operations',
                                          user='root',
                                          password='06021999')
@@ -146,7 +148,8 @@ def tryToSell(BTC,BLUSD,BLBTC):
     # B.append(BLUSD * 0)
 
     BTCF = float(BTC)
-    connection = mysql.connector.connect(host='localhost',
+    connection = mysql.connector.connect(host='192.168.1.32',
+                                         port='3306',
                                          database='Operations',
                                          user='root',
                                          password='06021999')
@@ -203,17 +206,18 @@ if __name__ == '__main__':
     LastOpPrice = 100
 
     # GetTestingData
-    connection = mysql.connector.connect(host='localhost',
-                                         database='Operations',
-                                         user='root',
-                                         password='06021999')
-    cursor = connection.cursor()
-    cursor.execute("select NVDA_Value from testing")
-    result = cursor.fetchall()
-    for line in result :
-        t= float(re.search(r'\d+', str(line)).group())
-        TestingData.append(t)
-    print(TestingData)
+    # connection = mysql.connector.connect(host='192.168.1.32',
+    #                                      port='3306',
+    #                                      database='Operations',
+    #                                      user='root',
+    #                                      password='06021999')
+    # cursor = connection.cursor()
+    # cursor.execute("select NVDA_Value from testing")
+    # result = cursor.fetchall()
+    # for line in result :
+    #     t= float(re.search(r'\d+', str(line)).group())
+    #     TestingData.append(t)
+    # print(TestingData)
 
     polo = Poloniex('QHKEQWBN-667F2YR6-QZ1WM5OX-VVB4GBSX', 'f7bc3077b4df19ffa9932253aeb329821b1377a2ba6c274b797f599e9ba555a5282fd032f539c416087dc5afcacade3fef6dd00f527910ed92a4c8be1ea13c15')
     # ForRealTime
