@@ -7,7 +7,7 @@ from poloniex import Poloniex
 # SQL connection
 import mysql.connector
 from mysql.connector import Error
-
+#check
 
 # SQL Connection
 try:
