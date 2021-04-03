@@ -7,7 +7,33 @@ from poloniex import Poloniex
 # SQL connection
 import mysql.connector
 from mysql.connector import Error
+from binance.client import Client
+from binance.enums import *
 #check
+client = Client("H8akMVB2npQP4RAfiA0Ik2IPIuBxVc4f1fvOXS3WiiqzA7ymaoRkxGIuQQjG66XF", "9Ad7GpsM0jWvE4ZKJrZL7IM2y1fHnRm6PjZvOgd57YYpFO8CY2oxvINIAeqHdJ3y", {"verify": True, "timeout": 20})
+
+
+
+# while(True):
+#     prices = client.get_symbol_ticker(symbol="ADAUSDT")
+#     print(prices)
+#     TotalPrice = float((prices.get('price')))
+#     print(TotalPrice)
+#     time.sleep(0.1)
+#     orders = client.get_all_orders(symbol='ADAUSDT', limit=10)
+#     print("prices",prices)
+#     balance = client.get_asset_balance(asset='USDT')
+#     print("balance",balance)
+#     order = client.create_test_order(
+#         symbol='ADAUSDT',
+#         side=SIDE_BUY,
+#         type=ORDER_TYPE_LIMIT,
+#         timeInForce=TIME_IN_FORCE_GTC,
+#         quantity=100, price='0.00001')
+#
+#     print("success")
+#     time.sleep(100)
+
 
 # SQL Connection
 try:
@@ -177,8 +203,8 @@ def tryToSell(BTC,BLUSD,BLBTC):
         BLUSD_B4 = BLUSD
         BLUSD = BLUSD * ((100 + Sell_ROI*1.5) / 100)
         BLBTC = BLBTC + (BLUSD-BLUSD_B4)/BTC
-        cursor.execute("INSERT INTO operations(BuyOrSell, BTCValue) VALUES (%s,%s)", ("Sell", BTCF))
-        connection.commit()
+        # cursor.execute("INSERT INTO operations(BuyOrSell, BTCValue) VALUES (%s,%s)", ("Sell", BTCF))
+        # connection.commit()
         print('Sold succeded')
     else:
         print('Sold unsecceded')
