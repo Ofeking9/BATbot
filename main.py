@@ -10,7 +10,7 @@ from mysql.connector import Error
 from binance.client import Client
 from binance.enums import *
 #check
-client = Client("H8akMVB2npQP4RAfiA0Ik2IPIuBxVc4f1fvOXS3WiiqzA7ymaoRkxGIuQQjG66XF", "9Ad7GpsM0jWvE4ZKJrZL7IM2y1fHnRm6PjZvOgd57YYpFO8CY2oxvINIAeqHdJ3y", {"verify": True, "timeout": 20})
+client = Client("", "", {"verify": True, "timeout": 20})
 
 
 
